@@ -1,22 +1,22 @@
 import React from "react";
-import "../styles/LayoutStyles.css";
-import { adminMenu, userMenu } from "./../Data/data";
-
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { Badge, message } from "antd";
+
+import { adminMenu, userMenu } from "../Data/data";
+
+import "../styles/LayoutStyles.css";
+
 const Layout = ({ children }) => {
   const { user } = useSelector((state) => state.user);
   const location = useLocation();
   const navigate = useNavigate();
-  // logout funtion
   const handleLogout = () => {
     localStorage.clear();
     message.success("Logout Successfully");
     navigate("/login");
   };
 
-  // =========== doctor menu ===============
   const doctorMenu = [
     {
       name: "Home",
@@ -35,9 +35,7 @@ const Layout = ({ children }) => {
       icon: "fa-solid fa-user",
     },
   ];
-  // =========== doctor menu ===============
 
-  // redering menu list
   const SidebarMenu = user?.isAdmin
     ? adminMenu
     : user?.isDoctor

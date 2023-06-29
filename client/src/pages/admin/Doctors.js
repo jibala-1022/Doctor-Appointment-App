@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from "react";
-import Layout from "./../../components/Layout";
 import axios from "axios";
 import { message, Table } from "antd";
 
+import Layout from "./../../components/Layout";
+
 const Doctors = () => {
   const [doctors, setDoctors] = useState([]);
-  //getUsers
+
   const getDoctors = async () => {
     try {
       const res = await axios.get("/api/v1/admin/getAllDoctors", {
@@ -21,7 +22,6 @@ const Doctors = () => {
     }
   };
 
-  // handle account
   const handleAccountStatus = async (record, status) => {
     try {
       const res = await axios.post(
@@ -38,7 +38,7 @@ const Doctors = () => {
         window.location.reload();
       }
     } catch (error) {
-      message.error("Something Went Wrong");
+      message.error(error);
     }
   };
 
@@ -61,7 +61,7 @@ const Doctors = () => {
       dataIndex: "status",
     },
     {
-      title: "phone",
+      title: "Phone",
       dataIndex: "phone",
     },
     {
@@ -69,10 +69,10 @@ const Doctors = () => {
       dataIndex: "actions",
       render: (text, record) => (
         <div className="d-flex">
-          {record.status === "pending" ? (
+          {record.status === "Pending" ? (
             <button
               className="btn btn-success"
-              onClick={() => handleAccountStatus(record, "approved")}
+              onClick={() => handleAccountStatus(record, "Approved")}
             >
               Approve
             </button>

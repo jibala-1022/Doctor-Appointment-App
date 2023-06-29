@@ -1,17 +1,19 @@
 import React from "react";
-import Layout from "./../components/Layout";
 import { Col, Form, Input, Row, TimePicker, message } from "antd";
 import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { showLoading, hideLoading } from "../redux/features/alertSlice";
 import axios from "axios";
 import moment from "moment";
+
+import { showLoading, hideLoading } from "../redux/features/alertSlice";
+
+import Layout from "./../components/Layout";
+
 const ApplyDoctor = () => {
   const { user } = useSelector((state) => state.user);
-
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  //handle form
+
   const handleFinish = async (values) => {
     try {
       dispatch(showLoading());
@@ -57,7 +59,7 @@ const ApplyDoctor = () => {
               required
               rules={[{ required: true }]}
             >
-              <Input type="text" placeholder="your first name" />
+              <Input type="text" placeholder="First name" />
             </Form.Item>
           </Col>
           <Col xs={24} md={24} lg={8}>
@@ -67,7 +69,7 @@ const ApplyDoctor = () => {
               required
               rules={[{ required: true }]}
             >
-              <Input type="text" placeholder="your last name" />
+              <Input type="text" placeholder="Last name" />
             </Form.Item>
           </Col>
           <Col xs={24} md={24} lg={8}>
@@ -77,7 +79,7 @@ const ApplyDoctor = () => {
               required
               rules={[{ required: true }]}
             >
-              <Input type="text" placeholder="your contact no" />
+              <Input type="text" placeholder="Contact no" />
             </Form.Item>
           </Col>
           <Col xs={24} md={24} lg={8}>
@@ -87,12 +89,12 @@ const ApplyDoctor = () => {
               required
               rules={[{ required: true }]}
             >
-              <Input type="email" placeholder="your email address" />
+              <Input type="email" placeholder="Email address" />
             </Form.Item>
           </Col>
           <Col xs={24} md={24} lg={8}>
             <Form.Item label="Website" name="website">
-              <Input type="text" placeholder="your website" />
+              <Input type="text" placeholder="Website (optional)" />
             </Form.Item>
           </Col>
           <Col xs={24} md={24} lg={8}>
@@ -102,7 +104,7 @@ const ApplyDoctor = () => {
               required
               rules={[{ required: true }]}
             >
-              <Input type="text" placeholder="your clinic address" />
+              <Input type="text" placeholder="Clinic address" />
             </Form.Item>
           </Col>
         </Row>
@@ -115,7 +117,7 @@ const ApplyDoctor = () => {
               required
               rules={[{ required: true }]}
             >
-              <Input type="text" placeholder="your specialization" />
+              <Input type="text" placeholder="Specialization" />
             </Form.Item>
           </Col>
           <Col xs={24} md={24} lg={8}>
@@ -125,17 +127,17 @@ const ApplyDoctor = () => {
               required
               rules={[{ required: true }]}
             >
-              <Input type="text" placeholder="your experience" />
+              <Input type="text" placeholder="Experience" />
             </Form.Item>
           </Col>
           <Col xs={24} md={24} lg={8}>
             <Form.Item
-              label="Fees Per Cunsaltation"
-              name="feesPerCunsaltation"
+              label="Fee Per Consulltation"
+              name="fee"
               required
               rules={[{ required: true }]}
             >
-              <Input type="text" placeholder="your contact no" />
+              <Input type="text" placeholder="Fee" />
             </Form.Item>
           </Col>
           <Col xs={24} md={24} lg={8}>
@@ -146,7 +148,7 @@ const ApplyDoctor = () => {
           <Col xs={24} md={24} lg={8}></Col>
           <Col xs={24} md={24} lg={8}>
             <button className="btn btn-primary form-btn" type="submit">
-              Submit
+              Apply
             </button>
           </Col>
         </Row>

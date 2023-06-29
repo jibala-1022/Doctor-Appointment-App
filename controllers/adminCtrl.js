@@ -1,19 +1,19 @@
-const doctorModel = require("../models/doctorModel");
 const userModel = require("../models/userModels");
+const doctorModel = require("../models/doctorModel");
 
 const getAllUsersController = async (req, res) => {
   try {
     const users = await userModel.find({});
     res.status(200).send({
       success: true,
-      message: "users data list",
+      message: "Users data list",
       data: users,
     });
   } catch (error) {
     console.log(error);
     res.status(500).send({
       success: false,
-      message: "erorr while fetching users",
+      message: "Error while fetching users",
       error,
     });
   }
@@ -24,20 +24,19 @@ const getAllDoctorsController = async (req, res) => {
     const doctors = await doctorModel.find({});
     res.status(200).send({
       success: true,
-      message: "Doctors Data list",
+      message: "Doctors data list",
       data: doctors,
     });
   } catch (error) {
     console.log(error);
     res.status(500).send({
       success: false,
-      message: "error while getting doctors data",
+      message: "Error while fetching doctors",
       error,
     });
   }
 };
 
-// doctor account status
 const changeAccountStatusController = async (req, res) => {
   try {
     const { doctorId, status } = req.body;
@@ -46,21 +45,21 @@ const changeAccountStatusController = async (req, res) => {
     const notifcation = user.notifcation;
     notifcation.push({
       type: "doctor-account-request-updated",
-      message: `Your Doctor Account Request Has ${status} `,
+      message: `Your doctor account request has ${status}`,
       onClickPath: "/notification",
     });
-    user.isDoctor = status === "approved" ? true : false;
+    user.isDoctor = status === "Approved" ? true : false;
     await user.save();
     res.status(201).send({
       success: true,
-      message: "Account Status Updated",
+      message: "Account status updated",
       data: doctor,
     });
   } catch (error) {
     console.log(error);
     res.status(500).send({
       success: false,
-      message: "Eror in Account Status",
+      message: "Error in account status",
       error,
     });
   }

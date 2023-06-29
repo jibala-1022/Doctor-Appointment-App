@@ -1,16 +1,18 @@
 import React from "react";
-import Layout from "./../components/Layout";
 import { message, Tabs } from "antd";
 import { useSelector, useDispatch } from "react-redux";
-import { showLoading, hideLoading } from "../redux/features/alertSlice";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+
+import { showLoading, hideLoading } from "../redux/features/alertSlice";
+
+import Layout from "./../components/Layout";
 
 const NotificationPage = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { user } = useSelector((state) => state.user);
-  //   handle read notification
+
   const handleMarkAllRead = async () => {
     try {
       dispatch(showLoading());
@@ -34,11 +36,10 @@ const NotificationPage = () => {
     } catch (error) {
       dispatch(hideLoading());
       console.log(error);
-      message.error("somthing went wrong");
+      message.error("Something went wrong");
     }
   };
 
-  // delete notifications
   const handleDeleteAllRead = async () => {
     try {
       dispatch(showLoading());
@@ -60,14 +61,14 @@ const NotificationPage = () => {
     } catch (error) {
       dispatch(hideLoading());
       console.log(error);
-      message.error("Somthing Went Wrong In Ntifications");
+      message.error("Somthing went wrong");
     }
   };
   return (
     <Layout>
-      <h4 className="p-3 text-center">Notification Page</h4>
+      <h4 className="p-3 text-center">Notifications Page</h4>
       <Tabs>
-        <Tabs.TabPane tab="unRead" key={0}>
+        <Tabs.TabPane tab="Unread" key={0}>
           <div className="d-flex justify-content-end">
             <h4 className="p-2" onClick={handleMarkAllRead}>
               Mark All Read

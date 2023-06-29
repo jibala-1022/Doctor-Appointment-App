@@ -21,7 +21,6 @@ export const userMenu = [
   },
 ];
 
-// admin menu
 export const adminMenu = [
   {
     name: "Home",

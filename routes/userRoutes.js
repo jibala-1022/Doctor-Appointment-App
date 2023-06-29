@@ -1,4 +1,6 @@
 const express = require("express");
+
+const authMiddleware = require("../middlewares/authMiddleware");
 const {
   loginController,
   registerController,
@@ -11,7 +13,6 @@ const {
   bookingAvailabilityController,
   userAppointmentsController,
 } = require("../controllers/userCtrl");
-const authMiddleware = require("../middlewares/authMiddleware");
 
 //router onject
 const router = express.Router();
@@ -30,17 +31,9 @@ router.post("/getUserData", authMiddleware, authController);
 router.post("/apply-doctor", authMiddleware, applyDoctorController);
 
 //Notifiaction  Doctor || POST
-router.post(
-  "/get-all-notification",
-  authMiddleware,
-  getAllNotificationController
-);
+router.post("/get-all-notification", authMiddleware, getAllNotificationController);
 //Notifiaction  Doctor || POST
-router.post(
-  "/delete-all-notification",
-  authMiddleware,
-  deleteAllNotificationController
-);
+router.post("/delete-all-notification", authMiddleware, deleteAllNotificationController);
 
 //GET ALL DOC
 router.get("/getAllDoctors", authMiddleware, getAllDocotrsController);
@@ -49,11 +42,7 @@ router.get("/getAllDoctors", authMiddleware, getAllDocotrsController);
 router.post("/book-appointment", authMiddleware, bookeAppointmnetController);
 
 //Booking Avliability
-router.post(
-  "/booking-availbility",
-  authMiddleware,
-  bookingAvailabilityController
-);
+router.post("/booking-availbility", authMiddleware, bookingAvailabilityController);
 
 //Appointments List
 router.get("/user-appointments", authMiddleware, userAppointmentsController);
