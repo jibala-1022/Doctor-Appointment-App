@@ -18,5 +18,5 @@ Check out the site deployed at [https://doctor-appointment-app-tcs0.onrender.com
 
 ### Roles
 1. Admin - Processes doctor applications
-2. Doctor - Managess appointments
+2. Doctor - Manages appointments
 3. User - Book appointments / Register as doctor
