@@ -13,13 +13,12 @@ const BookingPage = () => {
   const [doctors, setDoctors] = useState([]);
   const [date, setDate] = useState("");
   const [time, setTime] = useState();
-  const [isAvailable, setIsAvailable] = useState(false);
   const dispatch = useDispatch();
-  // login user data
+
   const getUserData = async () => {
     try {
       const res = await axios.post(
-        "/api/v1/doctor/getDoctorById",
+        "/api/v1/doctor/getDoctorById", 
         { doctorId: params.doctorId },
         {
           headers: {
@@ -34,35 +33,9 @@ const BookingPage = () => {
       console.log(error);
     }
   };
-  // ============ handle availiblity
-  const handleAvailability = async () => {
-    try {
-      dispatch(showLoading());
-      const res = await axios.post(
-        "/api/v1/user/booking-availbility",
-        { doctorId: params.doctorId, date, time },
-        {
-          headers: {
-            Authorization: `Bearer ${localStorage.getItem("token")}`,
-          },
-        }
-      );
-      dispatch(hideLoading());
-      if (res.data.success) {
-        setIsAvailable(true);
-        message.success(res.data.message);
-      } else {
-        message.error(res.data.message);
-      }
-    } catch (error) {
-      dispatch(hideLoading());
-      console.log(error);
-    }
-  };
-  // =============== booking func
+
   const handleBooking = async () => {
     try {
-      setIsAvailable(true);
       if (!date && !time) {
         return alert("Date & Time Required");
       }
@@ -70,12 +43,13 @@ const BookingPage = () => {
       const res = await axios.post(
         "/api/v1/user/book-appointment",
         {
-          doctorId: params.doctorId,
           userId: user._id,
+          doctorId: params.doctorId,
           doctorInfo: doctors,
           userInfo: user,
           date: date,
           time: time,
+          status: "Pending"
         },
         {
           headers: {
@@ -99,14 +73,16 @@ const BookingPage = () => {
   }, []);
   return (
     <Layout>
+      <div style={{margin:"20px"}}>
       <h3>Booking Page</h3>
-      <div className="container m-2">
+      <hr />
+      <div className="container">
         {doctors && (
           <div>
             <h4>
-              Dr.{doctors.firstName} {doctors.lastName}
+              Dr. {doctors.firstName} {doctors.lastName}
             </h4>
-            <h4>Fees : {doctors.feesPerCunsaltation}</h4>
+            <h4>Fees : &#8377; {doctors.fee}</h4>
             <h4>
               Timings : {doctors.timings && doctors.timings[0]} -{" "}
               {doctors.timings && doctors.timings[1]}{" "}
@@ -129,19 +105,13 @@ const BookingPage = () => {
                 }}
               />
 
-              <button
-                className="btn btn-primary mt-2"
-                onClick={handleAvailability}
-              >
-                Check Availability
-              </button>
-
-              <button className="btn btn-dark mt-2" onClick={handleBooking}>
+              <button className="btn btn-primary mt-2" onClick={handleBooking}>
                 Book Now
               </button>
             </div>
           </div>
         )}
+      </div>
       </div>
     </Layout>
   );

@@ -47,7 +47,7 @@ const Register = () => {
           <Form.Item label="Password" name="password">
             <Input type="password" required />
           </Form.Item>
-          <Link to="/login" className="m-2">
+          <Link to="/login" className="m-4">
             Already a user? Login here
           </Link>
           <button className="btn btn-primary" type="submit">

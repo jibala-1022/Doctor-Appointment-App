@@ -6,6 +6,8 @@
 }
 
 .register-form {
-  border: 1px solid gray;
   padding: 30px;
+  border: none;
+  border-radius: 5px;
+  box-shadow: 0px 0px 5px #222222;
 }

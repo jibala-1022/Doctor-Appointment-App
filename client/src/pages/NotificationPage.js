@@ -18,9 +18,7 @@ const NotificationPage = () => {
       dispatch(showLoading());
       const res = await axios.post(
         "/api/v1/user/get-all-notification",
-        {
-          userId: user._id,
-        },
+        { userId: user._id, },
         {
           headers: {
             Authorization: `Bearer ${localStorage.getItem("token")}`,
@@ -66,20 +64,18 @@ const NotificationPage = () => {
   };
   return (
     <Layout>
-      <h4 className="p-3 text-center">Notifications Page</h4>
+      <div style={{padding: "20px"}}>
+      <h4 className="p-3 text-center">Notifications</h4>
       <Tabs>
         <Tabs.TabPane tab="Unread" key={0}>
           <div className="d-flex justify-content-end">
-            <h4 className="p-2" onClick={handleMarkAllRead}>
+            <h4 className="p-2 text-success" style={{ cursor: "pointer" }} onClick={handleMarkAllRead}>
               Mark All Read
             </h4>
           </div>
-          {user?.notifcation.map((notificationMgs) => (
-            <div className="card" style={{ cursor: "pointer" }}>
-              <div
-                className="card-text"
-                onClick={() => navigate(notificationMgs.onClickPath)}
-              >
+          {user?.notification.map((notificationMgs) => (
+            <div className="card p-2 m-2">
+              <div className="card-text">
                 {notificationMgs.message}
               </div>
             </div>
@@ -88,25 +84,23 @@ const NotificationPage = () => {
         <Tabs.TabPane tab="Read" key={1}>
           <div className="d-flex justify-content-end">
             <h4
-              className="p-2 text-primary"
+              className="p-2 text-danger"
               style={{ cursor: "pointer" }}
               onClick={handleDeleteAllRead}
-            >
+              >
               Delete All Read
             </h4>
           </div>
           {user?.seennotification.map((notificationMgs) => (
-            <div className="card" style={{ cursor: "pointer" }}>
-              <div
-                className="card-text"
-                onClick={() => navigate(notificationMgs.onClickPath)}
-              >
+            <div className="card p-2 m-2">
+              <div className="card-text">
                 {notificationMgs.message}
               </div>
             </div>
           ))}
         </Tabs.TabPane>
       </Tabs>
+      </div>
     </Layout>
   );
 };

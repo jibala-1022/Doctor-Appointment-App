@@ -7,7 +7,8 @@ import DoctorList from "../components/DoctorList";
 
 const HomePage = () => {
   const [doctors, setDoctors] = useState([]);
-  const getUserData = async () => {
+
+  const getDoctorData = async () => {
     try {
       const res = await axios.get("/api/v1/user/getAllDoctors", {
           headers: {
@@ -24,12 +25,13 @@ const HomePage = () => {
   };
 
   useEffect(() => {
-    getUserData();
+    getDoctorData();
   }, []);
 
   return (
     <Layout>
-      <h1 className="text-center">Home Page</h1>
+      <h1 className="text-center m-2 p-2">Welcome</h1>
+      <h6 className="text-center px-5">Book appointments from the comfort of your home</h6>
       <Row>
         {doctors && doctors.map((doctor) => <DoctorList doctor={doctor} />)}
       </Row>

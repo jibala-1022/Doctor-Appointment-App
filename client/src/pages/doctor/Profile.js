@@ -13,8 +13,7 @@ const Profile = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const params = useParams();
-  // update doc ==========
-  //handle form
+
   const handleFinish = async (values) => {
     try {
       dispatch(showLoading());
@@ -47,9 +46,7 @@ const Profile = () => {
       message.error("Somthing Went Wrrong ");
     }
   };
-  // update doc ==========
-
-  //getDOc Details
+  
   const getDoctorInfo = async () => {
     try {
       const res = await axios.post(
@@ -75,8 +72,8 @@ const Profile = () => {
   }, []);
   return (
     <Layout>
-      <h1>Manage Profile</h1>
-      {doctor && (
+      <h1 className="text-center">Manage Profile</h1>
+      {doctor ? (
         <Form
           layout="vertical"
           onFinish={handleFinish}
@@ -172,7 +169,7 @@ const Profile = () => {
             <Col xs={24} md={24} lg={8}>
               <Form.Item
                 label="Fees Per Cunsaltation"
-                name="feesPerCunsaltation"
+                name="fee"
                 required
                 rules={[{ required: true }]}
               >
@@ -192,6 +189,12 @@ const Profile = () => {
             </Col>
           </Row>
         </Form>
+      ) : (
+        <div className="text-center">
+          <h1>Oops!</h1>
+          <h4>You are not a registered doctor on our site</h4>
+          <h4>Send us your application</h4>
+        </div>
       )}
     </Layout>
   );

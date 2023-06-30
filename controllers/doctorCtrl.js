@@ -90,16 +90,16 @@ const updateStatusController = async (req, res) => {
       { status }
     );
     const user = await userModel.findOne({ _id: appointments.userId });
-    const notifcation = user.notifcation;
-    notifcation.push({
+    const notification = user.notification;
+    notification.push({
       type: "status-updated",
-      message: `your appointment has been updated ${status}`,
+      message: `Your appointment has been updated ${status}`,
       onCLickPath: "/doctor-appointments",
     });
     await user.save();
     res.status(200).send({
       success: true,
-      message: "Appointment Status Updated",
+      message: "Appointment status updated",
     });
   } catch (error) {
     console.log(error);

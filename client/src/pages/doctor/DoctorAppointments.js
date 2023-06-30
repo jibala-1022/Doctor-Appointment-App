@@ -51,8 +51,17 @@ const DoctorAppointments = () => {
 
   const columns = [
     {
-      title: "ID",
-      dataIndex: "_id",
+      title: "Patient ID",
+      dataIndex: "userId",
+    },
+    {
+      title: "Patient Name",
+      dataIndex: "name",
+      render: (text, record) => (
+        <span>
+          {record.userInfo.name}
+        </span>
+      ),
     },
     {
       title: "Date & Time",
@@ -73,17 +82,17 @@ const DoctorAppointments = () => {
       dataIndex: "actions",
       render: (text, record) => (
         <div className="d-flex">
-          {record.status === "pending" && (
+          {record.status === "Pending" && (
             <div className="d-flex">
               <button
                 className="btn btn-success"
-                onClick={() => handleStatus(record, "approved")}
+                onClick={() => handleStatus(record, "Accepted")}
               >
-                Approved
+                Accept
               </button>
               <button
                 className="btn btn-danger ms-2"
-                onClick={() => handleStatus(record, "reject")}
+                onClick={() => handleStatus(record, "Rejected")}
               >
                 Reject
               </button>
@@ -95,7 +104,7 @@ const DoctorAppointments = () => {
   ];
   return (
     <Layout>
-      <h1>Appoinmtnets Lists</h1>
+      <h1 className="text-center p-2">Appointments</h1>
       <Table columns={columns} dataSource={appointments} />
     </Layout>
   );

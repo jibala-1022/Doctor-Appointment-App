@@ -93,8 +93,8 @@ const applyDoctorController = async (req, res) => {
     const newDoctor = await doctorModel({ ...req.body, status: "Pending" });
     await newDoctor.save();
     const adminUser = await userModel.findOne({ isAdmin: true });
-    const notifcation = adminUser.notifcation;
-    notifcation.push({
+    const notification = adminUser.notification;
+    notification.push({
       type: "apply-doctor-request",
       message: `${newDoctor.firstName} ${newDoctor.lastName} has applied for a doctor account`,
       data: {
@@ -103,7 +103,7 @@ const applyDoctorController = async (req, res) => {
         onClickPath: "/admin/docotrs",
       },
     });
-    await userModel.findByIdAndUpdate(adminUser._id, { notifcation });
+    await userModel.findByIdAndUpdate(adminUser._id, { notification });
     res.status(201).send({
       message: "Doctor account applied successfully",
       success: true,
@@ -122,10 +122,10 @@ const getAllNotificationController = async (req, res) => {
   try {
     const user = await userModel.findOne({ _id: req.body.userId });
     const seennotification = user.seennotification;
-    const notifcation = user.notifcation;
-    seennotification.push(...notifcation);
-    user.notifcation = [];
-    user.seennotification = notifcation;
+    const notification = user.notification;
+    seennotification.push(...notification);
+    user.notification = [];
+    user.seennotification = seennotification;
     const updatedUser = await user.save();
     res.status(200).send({
       success: true,
@@ -145,7 +145,7 @@ const getAllNotificationController = async (req, res) => {
 const deleteAllNotificationController = async (req, res) => {
   try {
     const user = await userModel.findOne({ _id: req.body.userId });
-    user.notifcation = [];
+    user.notification = [];
     user.seennotification = [];
     const updatedUser = await user.save();
     updatedUser.password = undefined;
@@ -164,7 +164,7 @@ const deleteAllNotificationController = async (req, res) => {
   }
 };
 
-const getAllDocotrsController = async (req, res) => {
+const getAllDoctorsController = async (req, res) => {
   try {
     const doctors = await doctorModel.find({ status: "Approved" });
     res.status(200).send({
@@ -182,7 +182,7 @@ const getAllDocotrsController = async (req, res) => {
   }
 };
 
-const bookeAppointmnetController = async (req, res) => {
+const bookAppointmnetController = async (req, res) => {
   try {
     req.body.date = moment(req.body.date, "DD-MM-YYYY").toISOString();
     req.body.time = moment(req.body.time, "HH:mm").toISOString();
@@ -190,7 +190,7 @@ const bookeAppointmnetController = async (req, res) => {
     const newAppointment = new appointmentModel(req.body);
     await newAppointment.save();
     const user = await userModel.findOne({ _id: req.body.doctorInfo.userId });
-    user.notifcation.push({
+    user.notification.push({
       type: "New-appointment-request",
       message: `New appointment request from ${req.body.userInfo.name}`,
       onCLickPath: "/user/appointments",
@@ -206,43 +206,6 @@ const bookeAppointmnetController = async (req, res) => {
       success: false,
       error,
       message: "Error while booking appointment",
-    });
-  }
-};
-
-const bookingAvailabilityController = async (req, res) => {
-  try {
-    const date = moment(req.body.date, "DD-MM-YY").toISOString();
-    const fromTime = moment(req.body.time, "HH:mm")
-      .subtract(1, "hours")
-      .toISOString();
-    const toTime = moment(req.body.time, "HH:mm").add(1, "hours").toISOString();
-    const doctorId = req.body.doctorId;
-    const appointments = await appointmentModel.find({
-      doctorId,
-      date,
-      time: {
-        $gte: fromTime,
-        $lte: toTime,
-      },
-    });
-    if (appointments.length > 0) {
-      return res.status(200).send({
-        message: "Appointments not availibale at this time",
-        success: true,
-      });
-    } else {
-      return res.status(200).send({
-        success: true,
-        message: "Appointments available",
-      });
-    }
-  } catch (error) {
-    console.log(error);
-    res.status(500).send({
-      success: false,
-      error,
-      message: "Error while booking",
     });
   }
 };
@@ -274,8 +237,7 @@ module.exports = {
   applyDoctorController,
   getAllNotificationController,
   deleteAllNotificationController,
-  getAllDocotrsController,
-  bookeAppointmnetController,
-  bookingAvailabilityController,
+  getAllDoctorsController,
+  bookAppointmnetController,
   userAppointmentsController,
 };

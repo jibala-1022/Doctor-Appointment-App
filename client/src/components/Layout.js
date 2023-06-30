@@ -11,6 +11,7 @@ const Layout = ({ children }) => {
   const { user } = useSelector((state) => state.user);
   const location = useLocation();
   const navigate = useNavigate();
+
   const handleLogout = () => {
     localStorage.clear();
     message.success("Logout Successfully");
@@ -28,7 +29,6 @@ const Layout = ({ children }) => {
       path: "/doctor-appointments",
       icon: "fa-solid fa-list",
     },
-
     {
       name: "Profile",
       path: `/doctor/profile/${user?._id}`,
@@ -47,8 +47,10 @@ const Layout = ({ children }) => {
         <div className="layout">
           <div className="sidebar">
             <div className="logo">
-              <h6 className="text-light">DOC APP</h6>
-              <hr />
+              <Link to="/">
+                <h3 className="text-light pb-2" >DOC APP</h3>
+              </Link>
+              <hr/>
             </div>
             <div className="menu">
               {SidebarMenu.map((menu) => {
@@ -68,11 +70,13 @@ const Layout = ({ children }) => {
               </div>
             </div>
           </div>
+
           <div className="content">
             <div className="header">
               <div className="header-content" style={{ cursor: "pointer" }}>
                 <Badge
-                  count={user && user.notifcation.length}
+                  count={user && user.notification.length}
+                  overflowCount={10}
                   onClick={() => {
                     navigate("/notification");
                   }}
@@ -80,7 +84,7 @@ const Layout = ({ children }) => {
                   <i class="fa-solid fa-bell"></i>
                 </Badge>
 
-                <Link to="/profile">{user?.name}</Link>
+                <Link to="/profile"><h4 className="p-2 m-0">{user?.name}</h4></Link>
               </div>
             </div>
             <div className="body">{children}</div>

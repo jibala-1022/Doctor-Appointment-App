@@ -18,10 +18,10 @@ app.use("/api/v1/user", require("./routes/userRoutes"));
 app.use("/api/v1/admin", require("./routes/adminRoutes"));
 app.use("/api/v1/doctor", require("./routes/doctorRoutes"));
 
-// app.use(express.static(path.join(__dirname, './client/build')));
-// app.get('*', (req, res) => {
-//   res.sendFile(path.join(__dirname, './client/build/index.html'));
-// })
+app.use(express.static(path.join(__dirname, './client/build')));
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, './client/build/index.html'));
+})
 
 const port = process.env.PORT || 8080;
 app.listen(port, () => {

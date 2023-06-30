@@ -28,23 +28,23 @@ const Appointments = () => {
 
   const columns = [
     {
-      title: "ID",
-      dataIndex: "_id",
+      title: "Doctor ID",
+      dataIndex: "doctorId",
     },
-    // {
-    //   title: "Name",
-    //   dataIndex: "name",
-    //   render: (text, record) => (
-    //     <span>
-    //       {record.doctorInfo.firstName} {record.doctorInfo.lastName}
-    //     </span>
-    //   ),
-    // },
-    // {
-    //   title: "Phone",
-    //   dataIndex: "phone",
-    //   render: (text, record) => <span>{record.doctorInfo.phone}</span>,
-    // },
+    {
+      title: "Doctor Name",
+      dataIndex: "name",
+      render: (text, record) => (
+        <span>
+          {record.doctorInfo.firstName} {record.doctorInfo.lastName}
+        </span>
+      ),
+    },
+    {
+      title: "Phone",
+      dataIndex: "phone",
+      render: (text, record) => <span>{record.doctorInfo.phone}</span>,
+    },
     {
       title: "Date & Time",
       dataIndex: "date",
@@ -63,7 +63,7 @@ const Appointments = () => {
 
   return (
     <Layout>
-      <h1>Appoinmtnets Lists</h1>
+      <h1 className="text-center p-2">Appointments</h1>
       <Table columns={columns} dataSource={appointments} />
     </Layout>
   );

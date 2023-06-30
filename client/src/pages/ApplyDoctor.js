@@ -48,9 +48,9 @@ const ApplyDoctor = () => {
   };
   return (
     <Layout>
-      <h1 className="text-center">Apply Doctor</h1>
+      <h1 className="text-center">Application</h1>
       <Form layout="vertical" onFinish={handleFinish} className="m-3">
-        <h4 className="">Personal Details : </h4>
+        <h4 className="">Personal Details</h4>
         <Row gutter={20}>
           <Col xs={24} md={24} lg={8}>
             <Form.Item
@@ -108,7 +108,7 @@ const ApplyDoctor = () => {
             </Form.Item>
           </Col>
         </Row>
-        <h4>Professional Details :</h4>
+        <h4>Professional Details</h4>
         <Row gutter={20}>
           <Col xs={24} md={24} lg={8}>
             <Form.Item
@@ -132,7 +132,7 @@ const ApplyDoctor = () => {
           </Col>
           <Col xs={24} md={24} lg={8}>
             <Form.Item
-              label="Fee Per Consulltation"
+              label="Consulation Fee (in &#8377;)"
               name="fee"
               required
               rules={[{ required: true }]}
