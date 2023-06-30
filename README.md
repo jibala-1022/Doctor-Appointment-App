@@ -10,7 +10,7 @@ Check out the site deployed at [https://doctor-appointment-app-tcs0.onrender.com
 - Database : MongoDB
 
 ## About the Site
----
+
 ### Key Features
 - Booking and checking availability of doctor appointments
 - Applying to register as doctor
