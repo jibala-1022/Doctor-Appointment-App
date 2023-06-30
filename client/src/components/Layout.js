@@ -45,6 +45,7 @@ const Layout = ({ children }) => {
     <>
       <div className="main">
         <div className="layout">
+
           <div className="sidebar">
             <div className="logo">
               <Link to="/">
@@ -81,14 +82,14 @@ const Layout = ({ children }) => {
                     navigate("/notification");
                   }}
                 >
-                  <i class="fa-solid fa-bell"></i>
+                  <i class="fa-solid fa-bell m-2"></i>
                 </Badge>
-
-                <Link to="/profile"><h4 className="p-2 m-0">{user?.name}</h4></Link>
+                <h4 className="p-2 m-2">{user?.name}</h4>
               </div>
             </div>
             <div className="body">{children}</div>
           </div>
+
         </div>
       </div>
     </>

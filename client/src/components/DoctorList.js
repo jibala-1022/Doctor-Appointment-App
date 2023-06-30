@@ -7,7 +7,7 @@ const DoctorList = ({ doctor }) => {
     <>
       <div
         className="card"
-        style={{ cursor: "pointer", marginLeft: "60px", marginTop: "30px", boxShadow: "0 0 2px #666666" }}
+        style={{ width:"250px", cursor: "pointer", marginLeft: "40px", marginTop: "30px", boxShadow: "0 0 2px #666666" }}
         onClick={() => navigate(`/doctor/book-appointment/${doctor._id}`)}
       >
         <div className="card-header">

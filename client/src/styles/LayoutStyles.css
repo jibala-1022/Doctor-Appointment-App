@@ -1,6 +1,7 @@
 .main {
   padding: 0px;
   height: 100vh;
+  position: sticky;
 }
 .layout {
   display: flex;
@@ -8,6 +9,7 @@
 }
 
 .sidebar {
+  position: sticky;
   min-height: 100%;
   width: 300px;
   background-image: linear-gradient(to right, blue, dodgerblue);
@@ -15,6 +17,7 @@
 }
 
 .content {
+  position: sticky;
   width: 100%;
   height: 100%;
 }
@@ -31,7 +34,8 @@
   background-image: linear-gradient(to right, dodgerblue, aquamarine);
 }
 .body {
-  height: 85vh;
+  overflow: auto;
+  height: 90vh;
   margin-bottom: 20px;
   background-color: white;
 
